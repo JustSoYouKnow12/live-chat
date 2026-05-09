@@ -1,0 +1,21 @@
+.main {
+    width: 100%;
+    height: 100vh;
+    background-color: orange;
+}
+
+.chat-history {
+    width: 100%;
+    height: auto;
+
+}
+
+.send-form input {
+    font-size: 2rem;
+    width: 85%
+}
+
+.send-form button {
+    font-size: 2rem;
+    min-width: 10%;
+}
