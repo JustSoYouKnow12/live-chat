@@ -40,6 +40,13 @@ app.post('/send', (req, res) => {
     res.send('OK');
 });
 
+app.get('/poll', (req, res) => {
+    res.status(200).json(data);
+    
+});
+
+
+
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
 });

@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="main">
-        <div class="chat-history"></div>
+        <div class="chat-history" id="chatHistory"></div>
         <div class="send-form">
             <form action="" id="sendForm">
                 <input type="text" id="message">
@@ -22,9 +22,20 @@
                 e.preventDefault();
                 sendMessage();
             });
-    
+
+            poll();
     });
 
+        async function poll() {
+            const response = await fetch('/poll');
+            const data = await response.json();
+            document.getElementById('chatHistory').innerHTML = data
+            .map(his => `<p>${his.nickname}: ${his.message} </p>`)
+            .join('');
+
+            setTimeout(poll, 1000);
+
+        }
         
 
         function sendMessage() {
@@ -36,10 +47,11 @@
                 },
                 body: JSON.stringify({
                     messageContent: message,
-                    nickname: 'Placeholder'
+                    nickname: '<%= nickname %>'
                 })
-            })
+            });
+            document.getElementById('message').value = '';
         }
     </script>
 </body>
-</html>
+</html> 
