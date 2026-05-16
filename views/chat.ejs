@@ -10,11 +10,36 @@
     <div class="main">
         <div class="chat-history"></div>
         <div class="send-form">
-            <form action="sendMessage">
-                <input type="text">
+            <form action="" id="sendForm">
+                <input type="text" id="message">
                 <button type="submit">Send</button>
             </form>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('sendForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                sendMessage();
+            });
+    
+    });
+
+        
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            fetch('/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    messageContent: message,
+                    nickname: 'Placeholder'
+                })
+            })
+        }
+    </script>
 </body>
 </html>

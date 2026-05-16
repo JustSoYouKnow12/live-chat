@@ -6,7 +6,8 @@
 
 .chat-history {
     width: 100%;
-    height: auto;
+    height: 85vh;
+    background-color: orange;
 
 }
 
