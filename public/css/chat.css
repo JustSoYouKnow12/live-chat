@@ -8,7 +8,10 @@
     width: 100%;
     height: 85vh;
     background-color: orange;
-
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 1.5rem;
 }
 
 .send-form input {
@@ -20,3 +23,14 @@
     font-size: 2rem;
     min-width: 10%;
 }
+
+.myself-msg {
+    color: rgb(0, 0, 0);
+    font-size: 1.5rem;
+}
+
+.system-message {
+    color: rgb(247, 0, 0);
+    font-size: 1.5rem;
+}
+

@@ -11,12 +11,15 @@
         <div class="chat-history" id="chatHistory"></div>
         <div class="send-form">
             <form action="" id="sendForm">
-                <input type="text" id="message">
+                <input type="text" id="message" autocomplete="off">
                 <button type="submit">Send</button>
             </form>
         </div>
     </div>
     <script>
+
+        const nickname = '<%= nickname %>';
+
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('sendForm').addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -26,14 +29,32 @@
             poll();
     });
 
+        function getMessageClass(hisMessage) {
+            if (hisMessage.nickname === nickname) {
+                return 'myself-msg';
+            } 
+            if (hisMessage.nickname === 'System') {
+                return 'system-message';
+                
+            }
+            return '';
+        }
+
+
         async function poll() {
             const response = await fetch('/poll');
             const data = await response.json();
-            document.getElementById('chatHistory').innerHTML = data
-            .map(his => `<p>${his.nickname}: ${his.message} </p>`)
+            const chatHistoryElem = document.getElementById('chatHistory');
+            const bottomGap = chatHistoryElem.scrollHeight - chatHistoryElem.scrollTop - chatHistoryElem.clientHeight;
+            chatHistoryElem.innerHTML = data
+            .map(his => `<p class="${getMessageClass(his)}">${his.nickname}: ${his.message} </p>`)
             .join('');
+            if (bottomGap < 5) {
+                chatHistoryElem.scrollTop = chatHistoryElem.scrollHeight;
+            }
 
-            setTimeout(poll, 1000);
+            
+            setTimeout(poll, 350);
 
         }
         
