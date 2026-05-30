@@ -9,15 +9,45 @@
 <body>
     <div class="container">
         <h1>Welcome to Live Chat Room</h1>
-        <form action="/join" method="post">
+        <form action="/join" method="post" id="loginForm">
             <div>
-                <input type="text" name="nickname" autocomplete="off">
-                >
+                <input id="nickname" type="text" name="nickname" autocomplete="off" placeholder="Enter your username" required autofocus> 
             </div>
             <div>
                 <button>Join</button>
             </div>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('loginForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const nickname = document.getElementById('nickname').value;
+                if (nickname.trim() === '') {
+                    e.preventDefault();
+                    alert('Please enter a valid username');
+                    return;
+                }
+
+                if (nickname.length > 20) {
+                    e.preventDefault();
+                    alert('Username should be less than 20 characters');
+                    return;
+                }
+                  if (await checkDuplicate(nickname)) {
+                    
+                    alert('Username already exists, please choose another one');
+                    return;
+                }
+                document.getElementById('loginForm').submit();
+            });
+        });
+        
+        async function checkDuplicate(nickname) {
+            const response = await fetch('/check/nickname?nickname=' + encodeURIComponent(nickname));
+            const data = await response.json();
+            return data.result;
+        }
+    </script>
 </body>
 </html>

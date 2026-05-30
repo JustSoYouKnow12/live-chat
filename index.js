@@ -15,17 +15,23 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 app.set('views', path.join(dirname, 'views'));
 
+let MessageId = 1;
 const data = [];
-
+const users = [];
 
 app.post('/join', (req, res) => {
     const nickname = req.body.nickname;
+    users.push(nickname);
+    const lastMessageId = MessageId++;
     data.push({
+        id: lastMessageId,
         nickname: 'System',
         message: 'Welcome ' + nickname,
         datetime: new Date()
     })
-    res.render('chat', { nickname });
+    users.push(nickname);
+
+    res.render('chat', { nickname, lastMessageId: lastMessageId-1});
 });
 
 app.post('/send', (req, res) => {
@@ -33,6 +39,7 @@ app.post('/send', (req, res) => {
     const nickname = req.body.nickname;
     console.log(msg, ', ', nickname);
     data.push({
+        id: MessageId++,
         nickname,
         message: msg,
         datetime: new Date()
@@ -41,11 +48,17 @@ app.post('/send', (req, res) => {
 });
 
 app.get('/poll', (req, res) => {
-    res.status(200).json(data);
-    
+    console.log(req.query.lastMessageId);
+    const lastMessageId = Number(req.query.lastMessageId);
+
+    res.status(200).json(data.filter(d => d.id > lastMessageId));
 });
 
-
+app.get('/check/nickname', (req, res) => {
+    console.log(req.query.nickname);
+    const foundIndex = users.findIndex(u => u.toLowerCase() === req.query.nickname.toLowerCase());
+    res.status(200).json({ result: foundIndex >= 0 });
+});
 
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
