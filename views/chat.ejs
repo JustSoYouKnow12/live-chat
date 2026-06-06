@@ -49,7 +49,7 @@
             const chatHistoryElem = document.getElementById('chatHistory');
             const bottomGap = chatHistoryElem.scrollHeight - chatHistoryElem.scrollTop - chatHistoryElem.clientHeight;
             chatHistoryElem.innerHTML += data
-            .map(his => `<p class="${getMessageClass(his)}">${his.nickname}: ${his.message} </p>`)
+            .map(his => `<p class="${getMessageClass(his)}"><span class="chat-datetime">${displayedDatetime(new Date(his.datetime))}</span><br>${his.nickname}: ${his.message} </p>`)
             .join('');
 
             if (bottomGap < 5) {
@@ -80,6 +80,21 @@
                 })
             });
             document.getElementById('message').value = '';
+        }
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        function displayedDatetime(dateObj) {
+            const nowObject = new Date();
+            if (nowObject.getTime() - dateObj.getTime() < 60*1000) {
+                return 'Just Now';
+            }
+            if (nowObject.getTime() - dateObj.getTime() < 60*60*1000) {
+                  const minutes = Math.round((nowObject.getTime() - dateObj.getTime())/1000/60);
+                  return `${minutes} minutes ago`;
+            }
+            if (nowObject.getFullYear() === dateObj.getFullYear() && nowObject.getMonth() === dateObj.getMonth() && nowObject.getDate() === dateObj.getDate()) {
+                  return dateObj.getHours() + ':' + dateObj.getMinutes();
+            }
+            return `${dateObj.getDate()} ${months[dateObj.getMonth()]} ${dateObj.getHours()} : ${dateObj.getMinutes()}`;
         }
     </script>
 </body>

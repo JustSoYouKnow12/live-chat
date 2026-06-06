@@ -34,3 +34,7 @@
     font-size: 1.5rem;
 }
 
+.chat-datetime {
+    color: rgb(255, 255, 255);
+    font-size: 0.75rem;
+}

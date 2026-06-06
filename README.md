@@ -2,7 +2,6 @@
 
 ## To Do:
 
-- Stop sending empty msg
 - Private chat
-- Nickname validation
 - Delete Messages
+- Refresh "Just Now"
