@@ -4,4 +4,10 @@
 
 - Private chat
 - Delete Messages
-- Refresh "Just Now"
+- **exponetial backoff**
+
+H/W 
+fix poll (chat ejs)
+// all the code
+do the catch method
+(error handling)

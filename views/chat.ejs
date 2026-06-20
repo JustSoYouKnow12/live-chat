@@ -19,7 +19,8 @@
     <script>
 
         const nickname = '<%= nickname %>';
-        let lastMessageId = <%= lastMessageId %>;
+        // let lastMessageId = <%= lastMessageId %>;
+        let lastMessageId = 0;
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('sendForm').addEventListener('submit', (e) => {
                 e.preventDefault();
