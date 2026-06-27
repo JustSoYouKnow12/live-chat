@@ -3,13 +3,17 @@
     "Terry",
     "Terry",
     "God damn",
-    "God damn"
+    "God damn",
+    "TEWWY",
+    "TEWWY",
+    "Random Non",
+    "Random Non"
   ],
   "history": [
     {
       "id": 1,
       "nickname": "System",
-      "message": "Welcome Terry",
+      "message": "System is gay",
       "datetime": "2026-06-20T05:26:01.340Z"
     },
     {
@@ -29,6 +33,18 @@
       "nickname": "God damn",
       "message": "test",
       "datetime": "2026-06-20T05:27:25.448Z"
+    },
+    {
+      "id": 5,
+      "nickname": "System",
+      "message": "Welcome TEWWY",
+      "datetime": "2026-06-27T04:10:24.417Z"
+    },
+    {
+      "id": 6,
+      "nickname": "System",
+      "message": "Welcome Random Non",
+      "datetime": "2026-06-27T04:11:40.756Z"
     }
   ]
 }

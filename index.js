@@ -81,6 +81,12 @@ app.get('/check/nickname', (req, res) => {
     res.status(200).json({ result: foundIndex >= 0 });
 });
 
-app.listen(3000, () => {
-    console.log('Server running at http://localhost:3000');
+const port = process.argv[2] ? Number(process.argv[2]) : 3000;
+
+if (!Number.isInteger(port) ) {
+    throw new Error('Invalid port number.' + process.argv[2]);
+}
+
+app.listen(port, () => {
+    console.log(`Server running at port ` + port);
 });
